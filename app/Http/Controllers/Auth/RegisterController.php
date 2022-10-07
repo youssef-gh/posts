@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    
+
+    public function __construct()
+    {
+        // we use this for logged person to stop watch page of guests like login register and redirect them
+        $this->middleware(['guest']);
+    }
+
     public function index() {
         return view('auth.register');
     }
