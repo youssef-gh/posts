@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('home');
@@ -22,7 +23,9 @@ Route::post('/Logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('store');
 
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::post('/posts', [PostController::class, 'store']);
 
-Route::get('/posts', function () {
-    return view('posts.index');
-});
+
+
+
