@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 
@@ -16,7 +17,7 @@ class DashboardController extends Controller
     
     public function index() {
         // we use posts (collection) and not posts() (relations)
-        dd(auth()->user()->posts);
+        dd(Post::find(6)->created_at->toTimeString());
         return view('dashboard');
     }
 }

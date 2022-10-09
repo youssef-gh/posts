@@ -8,7 +8,14 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        return view('posts.index');
+        // this get all posts
+        // $posts = Post::get();
+        
+        $posts = Post::paginate(2);
+
+        return view('posts.index', [
+            'posts' => $posts
+        ]);
     }
 
     public function store(Request $request) {
@@ -17,9 +24,11 @@ class PostController extends Controller
             'body' => 'required'
         ]);
         
-        $request->user()->posts()->create([
-            'body' => $request->body
-        ]);
+        // $request->user()->posts()->create([
+        //     'body' => $request->body
+        // ]);
+
+        $request->user()->posts()->create($request->only('body'));
 
         return back();
     }
