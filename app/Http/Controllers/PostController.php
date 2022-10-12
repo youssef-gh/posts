@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        // this get all posts
+        // this get all posts $posts = Post::get();
         // $posts = Post::get();
         
-        $posts = Post::paginate(4);
+        // $posts = Post::orderBy('created_at', 'desc')->with(['user', 'likes'])->paginate(20);
+        
+        $posts = Post::latest()->with(['user','likes'])->paginate(20);
 
         return view('posts.index', [
             'posts' => $posts
@@ -29,6 +31,16 @@ class PostController extends Controller
         // ]);
 
         $request->user()->posts()->create($request->only('body'));
+
+        return back();
+    }
+
+    public function destroy(Post $post) {
+
+        $this->authorize('delete', $post);
+        
+        $post->delete();
+        // Post::where('id', $post->id)->delete();
 
         return back();
     }

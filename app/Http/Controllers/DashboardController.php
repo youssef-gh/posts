@@ -17,7 +17,8 @@ class DashboardController extends Controller
     
     public function index() {
         // we use posts (collection) and not posts() (relations)
-        dd(Post::find(6)->created_at->toTimeString());
+        
+        // dd(Post::find(6)->created_at->toTimeString());
         return view('dashboard');
     }
 }
