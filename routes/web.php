@@ -8,12 +8,15 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserPostController;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/users/{user}/posts', [UserPostController::class, 'index'])->name('users.posts');
+
 
 Route::get('/Login', [LoginController::class, 'index'])->name('login');
 Route::post('/Login', [LoginController::class, 'store']);
